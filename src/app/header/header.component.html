@@ -1,0 +1,8 @@
+
+<div class="header">
+    <a>{{ this.currentUser.userName }}</a>
+    <div class="header-right">
+        <button (click)="logout()" [disabled]="loading" class="btn btn-primary">LOGOUT</button>
+        <button (click)="logout()" [disabled]="loading" class="btn btn-primary">CHANGE PASSWORD</button>
+    </div>
+</div>

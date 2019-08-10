@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../_services/user.service';
+import { Router } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
+import { first } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-recover',
+  templateUrl: './recover.component.html',
+  styleUrls: ['./recover.component.css']
 })
-export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+export class RecoverComponent implements OnInit {
+
+  recoveryForm: FormGroup;
   loading = false;
   submitted = false;
 
@@ -20,32 +21,28 @@ export class RegisterComponent implements OnInit {
     private alertService: AlertService) { }
 
     ngOnInit() {
-      this.registerForm = this.formBuilder.group({
-          mail: ['', [Validators.required,Validators.email]],
-          userRole: ['', Validators.required],
-          userName: ['', Validators.required],
-          password: ['', [Validators.required, Validators.minLength(6)]]
+      this.recoveryForm = this.formBuilder.group({
+          mail: ['', [Validators.required,Validators.email]]
       });
   }
 
-  get f() { return this.registerForm.controls; }
+  get f() { return this.recoveryForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if (this.recoveryForm.invalid) {
         return;
     }
 
     this.loading = true;
-    this.userService.register(this.registerForm.value)
+    this.userService.revocery(this.recoveryForm.value.mail)
         .pipe(first())
         .subscribe(
             data => {
               console.log(data);
               if(data && data.success){
-                this.alertService.success('Registration successful', true);
+                this.alertService.success('Password recoveried successfully', true);
                 this.router.navigate(['/login']);
               }else{
                 this.alertService.error(data.errorMessage);
@@ -57,4 +54,5 @@ export class RegisterComponent implements OnInit {
                 this.loading = false;
             });
   }
+
 }
