@@ -34,13 +34,11 @@ export class RecoverComponent implements OnInit {
     if (this.recoveryForm.invalid) {
         return;
     }
-
     this.loading = true;
     this.userService.revocery(this.recoveryForm.value.mail)
         .pipe(first())
         .subscribe(
             data => {
-              console.log(data);
               if(data && data.success){
                 this.alertService.success('Password recoveried successfully', true);
                 this.router.navigate(['/login']);

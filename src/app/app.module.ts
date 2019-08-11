@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { AlertComponent } from './alert/alert.component';
 import { RecoverComponent } from './recover/recover.component';
 import { HeaderComponent } from './header/header.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HeaderComponent } from './header/header.component';
     RegisterComponent,
     AlertComponent,
     RecoverComponent,
-    HeaderComponent
+    HeaderComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

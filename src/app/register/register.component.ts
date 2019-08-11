@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor( private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private router: Router,private userService: UserService,
     private alertService: AlertService) { }
 
@@ -43,7 +43,6 @@ export class RegisterComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-              console.log(data);
               if(data && data.success){
                 this.alertService.success('Registration successful', true);
                 this.router.navigate(['/login']);

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
     submitted = false;
-    returnUrl: string = '/home';
+    returnUrl: string = "/home";
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required,Validators.email]],
       password: ['', Validators.required]
-    })
+    });
   }
 get f() { return this.loginForm.controls; }
 

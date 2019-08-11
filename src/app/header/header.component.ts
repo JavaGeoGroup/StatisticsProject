@@ -4,6 +4,7 @@ import { UserModel } from '../_models/user-model.model';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
+import { Response } from '../_models/response.model';
 
 @Component({
   selector: 'app-header',
@@ -21,29 +22,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')).data.accountModel;
-    console.log(this.currentUser);
   }
 
   logout(){
-    this.authenticationService.logout()
-    .pipe(first())
-    .subscribe(
-        data => {
-          if(data.success){
-            // remove user from local storage to log user out
-            localStorage.removeItem('currentUser');
-            this.authenticationService.deleteHeaders();
-            this.router.navigate([this.loginUrl]);
-          }else{
-            console.log(data);
-            this.alertService.error(data.errorMessage);
-            this.loading = false;
-          }
-        },
-        error => {
-            this.alertService.error(error);
-            this.loading = false;
-        });
+    this.authenticationService.logout();
   }
 
   changePassword(){
@@ -57,7 +39,6 @@ export class HeaderComponent implements OnInit {
             this.authenticationService.deleteHeaders();
             this.router.navigate([this.loginUrl]);
           }else{
-            console.log(data);
             this.alertService.error(data.errorMessage);
             this.loading = false;
           }

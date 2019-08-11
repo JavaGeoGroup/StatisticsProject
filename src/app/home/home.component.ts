@@ -41,47 +41,4 @@ export class HomeComponent implements OnInit {
         //    this.users = users; 
         //});
     }
-    logout(){
-      this.authenticationService.logout()
-      .pipe(first())
-      .subscribe(
-          data => {
-            if(data.success){
-              // remove user from local storage to log user out
-              localStorage.removeItem('currentUser');
-              this.authenticationService.deleteHeaders();
-              this.router.navigate([this.loginUrl]);
-            }else{
-              console.log(data);
-              this.alertService.error(data.errorMessage);
-              this.loading = false;
-            }
-          },
-          error => {
-              this.alertService.error(error);
-              this.loading = false;
-          });
-    }
-
-    changePassword(){
-      /*this.userService.changePassword()
-      .pipe(first())
-      .subscribe(
-          data => {
-            if(data.success){
-              // remove user from local storage to log user out
-              localStorage.removeItem('currentUser');
-              this.authenticationService.deleteHeaders();
-              this.router.navigate([this.loginUrl]);
-            }else{
-              console.log(data);
-              this.alertService.error(data.errorMessage);
-              this.loading = false;
-            }
-          },
-          error => {
-              this.alertService.error(error);
-              this.loading = false;
-          });
-    */}
 }

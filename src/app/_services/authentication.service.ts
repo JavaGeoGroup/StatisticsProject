@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
+import { map, first } from 'rxjs/operators';
 import { Login } from '../_models/login.model';
 import { AlertService } from './alert.service';
+import { Response } from '../_models/response.model';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,36 +13,57 @@ import { AlertService } from './alert.service';
 export class AuthenticationService {
   private rootUrl: string = 'http://cmc-consulting.us-east-2.elasticbeanstalk.com';
   private token: string;
-  private headers:HttpHeaders ; 
-  private options;
+  private headers:HttpHeaders;
   private userLoggedIn:boolean = false;
-  constructor(private http: HttpClient,private alertService: AlertService) { }
+  private loginUrl: string ='/login';
+
+  constructor(private http: HttpClient,private alertService: AlertService,
+    private router: Router) { }
 
     login(loginModel: Login) {
-        return this.http.post(this.rootUrl + '/cmc/login', loginModel)
-            .pipe(map(user => {
+        return this.http.post<Response>(this.rootUrl + '/cmc/login', loginModel)
+            .pipe(map(response => {
                 // login successful if there's a jwt token in the response
-                if (user && user.success && user.data && user.data.accessToken) {
+                if (response && response.success && response.data && response.data.accessToken) {
                   // store user details and jwt token in local storage to keep user logged in between page refreshes
-                  localStorage.setItem('currentUser', JSON.stringify(user));
-                  this.token = user.data.accessToken;
-                  let headers = new HttpHeaders({
+                  localStorage.setItem('currentUser', JSON.stringify(response));
+                  this.token = response.data.accessToken;
+                  this.headers = new HttpHeaders({
                   'Content-Type': 'application/json',
                   'Access-Token': this.token});
-                  let options = { headers: headers };
                   this.userLoggedIn = true;
                 }
-                return user;
+                return response;
             }));
             
     }
 
     logout() {
-      return this.http.post(this.rootUrl + `/cmc/logout`,null,this.options);
+       this.http.post<Response>(this.rootUrl + '/cmc/logout',null,{headers: this.headers}).pipe(first())
+       .subscribe(
+           data => {
+             if(data.success){
+               // remove user from local storage to log user out
+               localStorage.removeItem('currentUser');
+               this.deleteHeaders();
+               this.router.navigate([this.loginUrl]);
+             }else{
+               this.alertService.error(data.errorMessage);
+             }
+           },
+           error => {
+               this.alertService.error(error);
+           });;
     }
 
-    isUserLoggedIn(){return this.userLoggedIn;}
-    deleteHeaders(){this.headers = null;this.options = null;this.token = null;this.userLoggedIn = false;}
+    isUserLoggedIn(){
+      if(localStorage.getItem('currentUser') && this.router.url != '/login'){
+        return true;
+      }
+      return false;
+    }
 
-    getHeaders(){return this.options;}
+    deleteHeaders(){this.headers = null;this.token = null;this.userLoggedIn = false;}
+
+    getHeaders(){return this.headers;}
 }
