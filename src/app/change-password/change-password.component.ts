@@ -39,7 +39,9 @@ export class ChangePasswordComponent implements OnInit {
         return;
     }
     this.loading = true;
-    this.userService.changePassword(this.changePasswordForm.value.newPassword,this.changePasswordForm.value.oldPassword)
+    this.userService.changePassword(this.changePasswordForm.value.newPassword,
+      this.changePasswordForm.value.oldPassword,
+      this.changePasswordForm.value.confirmPassword)
         .pipe(first())
         .subscribe(
             data => {

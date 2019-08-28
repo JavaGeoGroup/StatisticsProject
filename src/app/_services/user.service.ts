@@ -18,7 +18,8 @@ export class UserService {
     }
 
     register(signUpRequestModel: User) {
-        return this.http.post<Response>(this.rootUrl + `/cmc/signUp`, signUpRequestModel);
+        return this.http.post<Response>(this.rootUrl + `/cmc/signUp`, signUpRequestModel,
+        {headers: this.authenticationService.getHeaders()});
     }
 
     update(user: User) {
@@ -33,9 +34,10 @@ export class UserService {
         return this.http.post<Response>(this.rootUrl + "/cmc/recoverPassword",JSON.parse('{ "value": "'+ value + '"}'));
     }
 
-    changePassword(newPassword:string,oldPassword:string){
+    changePassword(newPassword:string,oldPassword:string,confirmPassword:string){
         var changePassRequest = {
             newPassword: newPassword,
+            newVerifyPassword: confirmPassword,
             oldPassword: oldPassword
         };
         return this.http.post<Response>(this.rootUrl + "/cmc/changePassword",changePassRequest,

@@ -1,1 +1,11 @@
 <p>HOME PAGE</p>
+
+<div>
+    <h2 style="background-color: rgba(255,145,186,1);font-size:2rem">Pie Chart1</h2>
+    <canvas baseChart [data]="pieChartData"
+            [labels]="pieChartLabels"
+            [chartType]="pieChartType"
+            [options]="pieChartOptions" 
+            (chartClick)="onChartClick($event)"
+            class="projectCharts"></canvas>
+</div>

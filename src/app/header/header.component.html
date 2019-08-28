@@ -3,6 +3,7 @@
     <a>{{ this.currentUser.userName }}</a>
     <div class="header-right">
         <button (click)="logout()" [disabled]="loading" class="btn btn-primary">LOGOUT</button>
+        <button [routerLink]="['/register']" class="btn btn-link">Register</button>
         <button [routerLink]="['/change-password']" [disabled]="loading" class="btn btn-link">CHANGE PASSWORD</button>
     </div>
 </div>
