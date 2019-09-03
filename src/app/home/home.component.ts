@@ -7,6 +7,8 @@ import { AlertService } from '../_services/alert.service';
 import { UserModel } from '../_models/user-model.model';
 import * as Chart from 'chart.js';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { ScoreService } from '../_services/score.service';
+import { Score } from '../_models/score.model';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +17,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 })
 export class HomeComponent implements OnInit {
 
-  currentUser: UserModel;
-  users: UserModel[] = [];
-  private loginUrl: string = '/login';
+  scores: Score[] = [];
   loading = false;
-  charChart: any;
-  pieChart: any;
-  lineChart: any;
-  polarAreaChart: any;
 
   title = 'app';
   public pieChartLabels: string[] = ["0-1", "1-2", "2-3", "3-4", "4-5"];
@@ -48,26 +44,41 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(private userService: UserService,
-    private authenticationService: AuthenticationService,
+    private scoreService: ScoreService,
     private router: Router,
     private alertService: AlertService) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
-    this.loadAllUsers();
+    console.log("initialize home component");
+    this.loadScores();
   }
 
   deleteUser(id: number) {
     this.userService.delete(id).pipe(first()).subscribe(() => {
-      this.loadAllUsers()
+      this.loadScores()
     });
   }
 
-  private loadAllUsers() {
-    //this.userService.getAll().pipe(first()).subscribe(users => { 
-    //    this.users = users; 
-    //});
+  private loadScores() {
+    console.log("loading scores");
+    this.scoreService.getScores()
+      .pipe(first())
+      .subscribe(
+        data => {
+          if(data && data.success){
+            console.log(data);
+            this.scores = data.data;
+            console.log(this.scores);
+          }else{
+            this.alertService.error(data.errorMessage);
+            this.loading = false;
+          }
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
   }
 
   public onChartClick(e: any): void {
