@@ -1,8 +1,12 @@
 /* Style the header with a grey background and some padding */
 .header {
     overflow: hidden;
-    background-color: #f1f1f1;
-    padding: 20px 10px;
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    padding: 0 10px;
+    justify-content: flex-end;
+    margin-bottom: 40px;
   }
   
   /* Style the header links */
@@ -14,13 +18,25 @@
     text-decoration: none;
     font-size: 18px; 
     line-height: 25px;
+    text-transform: capitalize;
     border-radius: 4px;
+  }
+
+  .header button.logoutBtn{
+    background: none;
+    border:none;
+    outline:none;
+    cursor: pointer;
+  }
+
+  .header a img {
+    width:50px;
+    height: 50px;
+    margin-right: 30px;
   }
   
   /* Float the link section to the right */
-  .header-right {
-    float: right;
-  }
+ 
   
   /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */ 
   @media screen and (max-width: 500px) {

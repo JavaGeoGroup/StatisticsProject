@@ -39,6 +39,7 @@ export class AuthenticationService {
     }
 
     logout() {
+      this.headers = this.getHeaders();
        this.http.post<Response>(this.rootUrl + '/cmc/logout',null,{headers: this.headers}).pipe(first())
        .subscribe(
            data => {
@@ -52,7 +53,7 @@ export class AuthenticationService {
              }
            },
            error => {
-               this.alertService.error(error);
+              this.alertService.error(error);
            });;
     }
 
@@ -65,5 +66,14 @@ export class AuthenticationService {
 
     deleteHeaders(){this.headers = null;this.token = null;this.userLoggedIn = false;}
 
-    getHeaders(){return this.headers;}
+    getHeaders(){
+      if(this.headers == null || this.headers == undefined){
+        this.token  = JSON.parse(localStorage.getItem('currentUser')).data.accessToken;
+        this.headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Token': this.token});
+          this.userLoggedIn = true;
+      }
+      return this.headers;
+    }
 }

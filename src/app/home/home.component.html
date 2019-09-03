@@ -1,11 +1,180 @@
-<p>HOME PAGE</p>
 
-<div>
-    <h2 style="background-color: rgba(255,145,186,1);font-size:2rem">Pie Chart1</h2>
-    <canvas baseChart [data]="pieChartData"
+        <div class="row topContainer">
+                <div class="col-md-3 score">
+                    <div>
+                            <h3>OVERALL SUCCESS</h3>
+                            <div class="scoreContainer">
+                                <span class="square"></span> <span class="value">90%</span>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 score">
+                    <div>
+                        <h3>TOTAL ISSUES</h3>
+                        <div class="scoreContainer">
+                            <span class="square"></span> <span class="value">14</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 score">
+                    <div>
+                    <h3>TOTAL OVERDUES</h3>
+                    <div class="scoreContainer">
+                        <span class="square"></span> <span class="value">75</span>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-3 score">
+                    <div>
+                            <h3>TOTAL BUDGET</h3>
+                            <div class="scoreContainer">
+                                <span class="square"></span> <span class="value">$80M</span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="lineContainer col-md-8">
+      <div>
+          <h2>Budget Report</h2>
+          <canvas
+            baseChart
+            [data]="lineChartData"
+            [labels]="lineChartLabels"
+            [chartType]="lineChartType"
+            [options]="lineChartOptions"
+            (chartClick)="onChartClick($event)"
+            class="projectCharts"
+          ></canvas>
+      </div>
+    </div>
+    
+
+    <div class="pieContainer col-md-4">
+      <div>
+          <h2>Overall Statistics</h2>
+          <canvas
+            baseChart
+            [data]="pieChartData"
             [labels]="pieChartLabels"
             [chartType]="pieChartType"
-            [options]="pieChartOptions" 
+            [options]="pieChartOptions"
             (chartClick)="onChartClick($event)"
-            class="projectCharts"></canvas>
+            class="projectCharts"
+          ></canvas>
+          <ul class="chartList">
+            <li>5</li>
+            <li>7</li>
+            <li>4</li>
+            <li>9</li>
+            <li>21</li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 updates">
+      <div>
+        <h4>project last updates</h4>
+
+        <div class="itemContainer">
+
+            <div class="updateItem">
+                <div class="imgContainer">
+                    <img
+                    src="http://cmconsulting.ge/wp-content/uploads/2018/12/Picture9.jpg"
+                    alt=""
+                  />
+                </div>
+                
+                <div>
+                  <p class="title">50 CHAVCHAVADZE AVE.
+                    </p>
+                  <p>Budget - electrical 10/09/2019</p>
+                </div>
+              </div>
+
+          <div class="updateItem">
+              <div class="imgContainer">
+            <img
+              src="http://cmconsulting.ge/wp-content/uploads/2017/09/Picture8.jpg"
+              alt=""
+            />
+              </div>
+            <div>
+              <p class="title">83 CHAVCHAVADZE AVE.</p>
+              <p>Issue - permissions on parking  10/09/2019</p>
+            </div>
+          </div>
+
+          <div class="updateItem">
+              <div class="imgContainer">
+            <img
+              src="http://cmconsulting.ge/wp-content/uploads/2018/10/Picture1.jpg"
+              alt=""
+            />
+              </div>
+            <div>
+              <p class="title">Hotel Marco Polo</p>
+              <p>Budget - Internal works  10/09/2019</p>
+            </div>
+          </div>
+
+          <div class="updateItem">
+              <div class="imgContainer">
+            <img
+              src="http://cmconsulting.ge/wp-content/uploads/2018/10/Picture4.jpg"
+              alt=""
+            /></div>
+            <div>
+              <p class="title">HOTEL AUTOGRAPH COLLECTION</p>
+              <p>Budget - parking  10/09/2019</p>
+            </div>
+          </div>
+
+          <div class="updateItem">
+              <div class="imgContainer">
+            <img
+              src="http://cmconsulting.ge/wp-content/uploads/2017/01/Casino-and-underground-parking-concept-design5-Copy-Copy-2.jpg"
+              alt=""
+            />
+              </div>
+            <div>
+              <p class="title">SHERATON PALACE CASINO & PARKING</p>
+              <p>Internal Design Works Need, 21 Nov, 2019</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 issues">
+      <div><h4>ISSUES</h4>
+        <ul class="unstyled centered">
+            <li>
+              <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1" checked>
+              <label for="styled-checkbox-1">get permission to add more parking space</label>
+            </li>
+            <li>
+              <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox" value="value2" >
+              <label for="styled-checkbox-2">Internal Design Works Need, 21 Nov, 2019</label>
+            </li>
+            <li>
+              <input class="styled-checkbox" id="styled-checkbox-3" type="checkbox" value="value3" >
+              <label for="styled-checkbox-3">increased prices for building materials</label>
+            </li>
+            <li>
+              <input class="styled-checkbox" id="styled-checkbox-4" type="checkbox" value="value4">
+              <label for="styled-checkbox-4">delay of importing building materials</label>
+            </li>
+          </ul>
+      </div>
+      
+    </div>
+  </div>
 </div>

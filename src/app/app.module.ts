@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule }    from '@angular/forms';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,8 @@ import { RecoverComponent } from './recover/recover.component';
 import { HeaderComponent } from './header/header.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChartsModule } from 'ng2-charts';
+import { SidebarComponent } from './sidebar/sidebar.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { ChartsModule } from 'ng2-charts';
     AlertComponent,
     RecoverComponent,
     HeaderComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

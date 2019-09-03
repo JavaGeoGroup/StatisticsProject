@@ -1,12 +1,17 @@
 <!-- main app container -->
-<div class="jumbotron">
-  <div class="container">
-      <div class="row">
-        <div class="col-sm-6 offset-sm-3">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="position-fixed">
+          <app-sidebar *ngIf="this.authenticationService.isUserLoggedIn()"></app-sidebar>
+        </div>
+        <div class="offset-md-2 offset-sm-3 col-md-10 cols-sm-9">
           <app-header class="header" *ngIf="this.authenticationService.isUserLoggedIn()"></app-header>
           <app-alert></app-alert>
           <router-outlet></router-outlet>
         </div>
       </div>
-  </div>
 </div>
+    
+
+

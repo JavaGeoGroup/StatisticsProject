@@ -17,64 +17,76 @@ export class HomeComponent implements OnInit {
 
   currentUser: UserModel;
   users: UserModel[] = [];
-  private loginUrl: string ='/login';
+  private loginUrl: string = '/login';
   loading = false;
-  charChart :any;
-  pieChart :any;
-  polarAreaChart :any;
+  charChart: any;
+  pieChart: any;
+  lineChart: any;
+  polarAreaChart: any;
 
   title = 'app';
-  public pieChartLabels:string[] = ["Pending", "InProgress", "OnHold", "Complete", "Cancelled"];
-  public pieChartData:number[] = [21, 39, 10, 14, 16];
-  public pieChartType:string = 'pie';
-  public pieChartOptions:any = {'backgroundColor': [
-               "#FF6384",
-            "#4BC0C0",
-            "#FFCE56",
-            "#E7E9ED",
-            "#36A2EB"
-            ]};
+  public pieChartLabels: string[] = ["0-1", "1-2", "2-3", "3-4", "4-5"];
+  public pieChartData: number[] = [20, 20, 20, 20, 20];
+  public pieChartType: string = 'doughnut';
+  public pieChartOptions: any = [{
+    'backgroundColor': [
+      "#FC5024",
+      "#5CCB76",
+      "#E0E043",
+      "#935CCB",
+      "#CB5C5C"
+    ]
+  }];
 
-    constructor(private userService: UserService,
-      private authenticationService: AuthenticationService,
-      private router: Router,
-      private alertService: AlertService) {
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    }
 
-    ngOnInit() {
-        this.loadAllUsers();
-    }
+  public lineChartLabels: string[] = ["0-1", "1-2", "2-3", "3-4", "4-5"];
+  public lineChartData: number[] = [0, 10, 35, 27, 40];
+  public lineChartType: string = 'line';
+  public lineChartOptions: any = {
+    'backgroundColor': "green",
+    'pointBackgroundColor' : 'green'
+  };
 
-    deleteUser(id: number) {
-        this.userService.delete(id).pipe(first()).subscribe(() => { 
-            this.loadAllUsers() 
-        });
-    }
+  constructor(private userService: UserService,
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private alertService: AlertService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
-    private loadAllUsers() {
-        //this.userService.getAll().pipe(first()).subscribe(users => { 
-        //    this.users = users; 
-        //});
-    }
+  ngOnInit() {
+    this.loadAllUsers();
+  }
 
-    public onChartClick(e:any):void {
-      console.log("hi");
-      console.log(e);
+  deleteUser(id: number) {
+    this.userService.delete(id).pipe(first()).subscribe(() => {
+      this.loadAllUsers()
+    });
+  }
 
-      if (e.active.length > 0) {
-        const chart = e.active[0]._chart;
-        const activePoints = chart.getElementAtEvent(e.event);
-        if ( activePoints.length > 0) {
-          // get the internal index of slice in pie chart
-          const clickedElementIndex = activePoints[0]._index;
-          const label = chart.data.labels[clickedElementIndex];
-          // get value by index
-          const value = chart.data.datasets[0].data[clickedElementIndex];
-          console.log(clickedElementIndex, label, value)
-        }
+  private loadAllUsers() {
+    //this.userService.getAll().pipe(first()).subscribe(users => { 
+    //    this.users = users; 
+    //});
+  }
+
+  public onChartClick(e: any): void {
+    console.log("hi");
+    console.log(e);
+
+    if (e.active.length > 0) {
+      const chart = e.active[0]._chart;
+      const activePoints = chart.getElementAtEvent(e.event);
+      if (activePoints.length > 0) {
+        // get the internal index of slice in pie chart
+        const clickedElementIndex = activePoints[0]._index;
+        const label = chart.data.labels[clickedElementIndex];
+        // get value by index
+        const value = chart.data.datasets[0].data[clickedElementIndex];
+        console.log(clickedElementIndex, label, value)
       }
-
     }
+
+  }
 
 }

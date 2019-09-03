@@ -1,5 +1,227 @@
-.projectCharts{
-    display: block;
-    width: 750px;
-    height: 290px;   
+.score{
+  padding:15px;
 }
+.score:first-child{
+  padding-left: 0;
+}
+
+.score>div{
+  padding:15px;
+  background: #fff;
+}
+
+.topContainer{
+  margin:0 0 10px 0;
+}
+
+.score h3,
+.pieContainer h2{
+  position: relative;
+  padding-bottom: 13px;
+}
+
+.scoreContainer{
+  padding:20px 5px;
+  display: flex;
+  align-items: center;
+}
+
+.scoreContainer span.square{
+  width:25px;
+  margin-right: 40px;
+  height:40px;
+  border:4px solid #83BEDF;
+  background:white;
+  display:inline-block
+}
+
+.score:nth-child(2) .scoreContainer span.square{
+  border-color: #43E0AA;
+}
+
+.score:nth-child(3) .scoreContainer span.square{
+  border-color: #935CCB;
+}
+
+
+.score:nth-child(4) .scoreContainer span.square{
+  border-color:#24AEFC;
+}
+
+.scoreContainer span.value{
+font-size: 50px;
+font-weight: bold;
+color: #5A5A5A;
+}
+
+
+.score h3:after,
+.pieContainer h2:after{
+  content: '';
+  width: 40px;
+  height:3px;
+  left:0;
+  background: #83BEDF;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+}
+
+
+
+
+.pieContainer{
+    padding: 20px ;
+}
+
+.chartList{
+    list-style:none;
+    padding-top: 40px;
+}
+
+ul.chartList li{
+  margin: 0 10px;
+    display: inline-block;
+    font-size: 24px;
+    margin: 0 25px;
+}
+
+
+
+.lineContainer {
+    padding: 20px 20px 20px 0;
+}
+
+.lineContainer div,
+.pieContainer div{
+    background: white !important;padding: 20px;
+}
+
+.flex{
+    display: flex
+}
+
+.issues>div,
+.updates>div{
+    background: white;
+    margin: 30px 0;
+    padding: 30px;
+}
+
+.issues>div{
+  padding-bottom: 203px
+}
+
+.updates{
+  margin-left: -15px;
+}
+
+.updates h4{
+    padding-bottom: 20px;
+    font-size: 20px;
+    letter-spacing:1px;
+}
+
+.updates .itemContainer:last-child{
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.updateItem{
+    border-top: 1px solid #EAEAEA;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.updateItem .imgContainer{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 25px;
+    overflow: hidden;
+    display: flex;
+}
+
+.updateItem .imgContainer img{
+  width: 100%
+}
+
+
+.updateItem .title{
+    margin:0;
+   font-size:18px;
+   font-weight: bold;
+   color: #555555
+}
+
+.styled-checkbox {
+    position: absolute;
+    opacity: 0;
+  }
+  .styled-checkbox + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    font-size: 17px;
+  }
+  .styled-checkbox + label:before {
+    content: "";
+    margin-right: 15px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border: 1px solid #D0D0D0;
+  }
+  .styled-checkbox:hover + label:before {
+    background: #24AEFC;
+  }
+  .styled-checkbox:focus + label:before {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+  }
+  .styled-checkbox:checked + label:before {
+    background: #24AEFC;
+  }
+  .styled-checkbox:disabled + label {
+    color: #b8b8b8;
+    cursor: auto;
+  }
+  .styled-checkbox:disabled + label:before {
+    box-shadow: none;
+    background: #ddd;
+  }
+  .styled-checkbox:checked + label:after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    background: white;
+    width: 2px;
+    height: 2px;
+    box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+  }
+
+  .styled-checkbox:checked + label{
+      text-decoration: line-through;
+      color: #B4B4B4;
+  }
+
+  .unstyled {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .issues li {
+    margin: 30px 0;
+  }
+
+  .issues{
+    margin-bottom: 50px
+  }
+  
+
+  
