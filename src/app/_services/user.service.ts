@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../_models/user.model';
 import { Observable } from 'rxjs';
-import { Response } from '../_models/response.model';
 import { AuthenticationService } from './authentication.service';
+import { AccountResponse } from '../_models/account-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class UserService {
     }
 
     register(signUpRequestModel: User) {
-        return this.http.post<Response>(this.rootUrl + `/cmc/signUp`, signUpRequestModel,
+        return this.http.post<AccountResponse>(this.rootUrl + `/cmc/signUp`, signUpRequestModel,
         {headers: this.authenticationService.getHeaders()});
     }
 
@@ -30,8 +30,8 @@ export class UserService {
         return this.http.delete(`/users/` + id);
     }
 
-    revocery(value: string):Observable<Response>{
-        return this.http.post<Response>(this.rootUrl + "/cmc/recoverPassword",JSON.parse('{ "value": "'+ value + '"}'));
+    revocery(value: string):Observable<AccountResponse>{
+        return this.http.post<AccountResponse>(this.rootUrl + "/cmc/recoverPassword",JSON.parse('{ "value": "'+ value + '"}'));
     }
 
     changePassword(newPassword:string,oldPassword:string,confirmPassword:string){
@@ -40,7 +40,7 @@ export class UserService {
             newVerifyPassword: confirmPassword,
             oldPassword: oldPassword
         };
-        return this.http.post<Response>(this.rootUrl + "/cmc/changePassword",changePassRequest,
+        return this.http.post<AccountResponse>(this.rootUrl + "/cmc/changePassword",changePassRequest,
         {headers: this.authenticationService.getHeaders()});
     }
 

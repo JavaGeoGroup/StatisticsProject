@@ -4,5 +4,5 @@ export class Response {
     errorMessage: string;
     message: string;
     success: boolean;
-    data: Data;
+    constructor(){};
 }

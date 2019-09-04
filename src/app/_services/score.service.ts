@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
-import { Response } from '../_models/response.model';
+import { ScoresResponse } from '../_models/scores-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ScoreService {
     private authenticationService: AuthenticationService) { }
 
     getScores() {
-      return this.http.get<Response>(this.rootUrl + '/project/getScores',
+      return this.http.get<ScoresResponse>(this.rootUrl + '/project/getScores',
       {headers: this.authenticationService.getHeaders()});
   }
 }

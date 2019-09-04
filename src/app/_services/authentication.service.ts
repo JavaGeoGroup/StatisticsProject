@@ -6,6 +6,7 @@ import { AlertService } from './alert.service';
 import { Response } from '../_models/response.model';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AccountResponse } from '../_models/account-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AuthenticationService {
     private router: Router) { }
 
     login(loginModel: Login) {
-        return this.http.post<Response>(this.rootUrl + '/cmc/login', loginModel)
+        return this.http.post<AccountResponse>(this.rootUrl + '/cmc/login', loginModel)
             .pipe(map(response => {
                 // login successful if there's a jwt token in the response
                 if (response && response.success && response.data && response.data.accessToken) {
@@ -40,7 +41,7 @@ export class AuthenticationService {
 
     logout() {
       this.headers = this.getHeaders();
-       this.http.post<Response>(this.rootUrl + '/cmc/logout',null,{headers: this.headers}).pipe(first())
+       this.http.post<AccountResponse>(this.rootUrl + '/cmc/logout',null,{headers: this.headers}).pipe(first())
        .subscribe(
            data => {
              if(data.success){

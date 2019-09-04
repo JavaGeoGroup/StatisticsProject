@@ -50,8 +50,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("initialize home component");
     this.loadScores();
+    this.fillPieChartsData();
   }
 
   deleteUser(id: number) {
@@ -60,8 +60,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  private fillPieChartsData(){
+    this.pieChartLabels = new Array(this.scores.length);
+    this.pieChartData = new Array(this.scores.length);
+
+    this.scores.forEach(score => {
+      this.pieChartLabels[score.overall] = score.overall.toString() + "-" + (score.overall + 1).toString();
+      this.pieChartData[score.overall] = score.projectIds.length;
+    })
+  }
+
   private loadScores() {
-    console.log("loading scores");
     this.scoreService.getScores()
       .pipe(first())
       .subscribe(
