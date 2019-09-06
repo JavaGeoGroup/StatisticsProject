@@ -28,6 +28,18 @@
     outline:none;
     cursor: pointer;
   }
+  .header button.registerBtn{
+    background: none;
+    border:none;
+    outline:none;
+    cursor: pointer;
+  }
+  .header button.changePasswordBtn{
+    background: none;
+    border:none;
+    outline:none;
+    cursor: pointer;
+  }
 
   .header a img {
     width:50px;

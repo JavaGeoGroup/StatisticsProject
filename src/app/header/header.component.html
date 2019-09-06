@@ -1,9 +1,7 @@
 
 <div class="header">
     <a [routerLink]="['/']"><img src='http://sg-fs.com/wp-content/uploads/2017/08/user-placeholder.png'/>{{ this.currentUser.userName }}</a>
-  
-        <button (click)="logout()" [disabled]="loading" class="logoutBtn">LOGOUT</button>
-        <!-- <button [routerLink]="['/register']" class="btn btn-link">Register</button>
-        <button [routerLink]="['/change-password']" [disabled]="loading" class="btn btn-link">CHANGE PASSWORD</button> -->
-    
+    <!--<button [routerLink]="['/register']" class="registerBtn">Register</button>-->
+    <button [routerLink]="['/change-password']" [disabled]="loading" class="changePasswordBtn">Change password</button>
+    <button (click)="logout()" [disabled]="loading" class="logoutBtn">LOGOUT</button> 
 </div>
