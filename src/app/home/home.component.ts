@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadScores();
-    this.fillPieChartsData();
   }
 
   deleteUser(id: number) {
@@ -65,9 +64,13 @@ export class HomeComponent implements OnInit {
     this.pieChartData = new Array(this.scores.length);
 
     this.scores.forEach(score => {
-      this.pieChartLabels[score.overall] = score.overall.toString() + "-" + (score.overall + 1).toString();
-      this.pieChartData[score.overall] = score.projectIds.length;
-    })
+      let localOverall = score.overall;
+      if(score.overall >= this.scores.length){
+        localOverall = score.overall - this.scores.length;
+      }
+      this.pieChartLabels[localOverall] = score.overall.toString() + "-" + (score.overall + 1).toString();
+      this.pieChartData[localOverall] = score.projectIds.length;
+    });
   }
 
   private loadScores() {
@@ -76,9 +79,10 @@ export class HomeComponent implements OnInit {
       .subscribe(
         data => {
           if(data && data.success){
-            console.log(data);
             this.scores = data.data;
-            console.log(this.scores);
+            this.fillPieChartsData();
+            console.log("Labels :" + this.pieChartLabels);
+            console.log("Data :" + this.pieChartData);
           }else{
             this.alertService.error(data.errorMessage);
             this.loading = false;
