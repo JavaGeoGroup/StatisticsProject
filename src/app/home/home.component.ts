@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
 
 
   public lineChartLabels: string[] = ["0-1", "1-2", "2-3", "3-4", "4-5"];
-  public lineChartData: number[] = [0, 10, 35, 27, 40];
+  public lineChartData: number[] = [0, 10, 30, 27, 40];
   public lineChartType: string = 'line';
   public lineChartOptions: any = {
     'backgroundColor': "green",

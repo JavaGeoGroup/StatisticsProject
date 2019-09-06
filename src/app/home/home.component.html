@@ -38,6 +38,23 @@
 
 <div class="container-fluid">
   <div class="row">
+
+    
+      <div class="pieContainer col-md-4">
+          <div>
+              <h2>Overall Statistics</h2>
+              <canvas
+                baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                (chartClick)="onChartClick($event)"
+                class="projectCharts"
+              ></canvas>
+          </div>
+        </div>
+        
     <div class="lineContainer col-md-8">
       <div>
           <h2>Budget Report</h2>
@@ -54,27 +71,6 @@
     </div>
     
 
-    <div class="pieContainer col-md-4">
-      <div>
-          <h2>Overall Statistics</h2>
-          <canvas
-            baseChart
-            [data]="pieChartData"
-            [labels]="pieChartLabels"
-            [chartType]="pieChartType"
-            [options]="pieChartOptions"
-            (chartClick)="onChartClick($event)"
-            class="projectCharts"
-          ></canvas>
-          <!--<ul class="chartList">
-            <li>5</li>
-            <li>7</li>
-            <li>4</li>
-            <li>9</li>
-            <li>21</li>
-          </ul>-->
-      </div>
-    </div>
   </div>
 
   <div class="row">
