@@ -1,12 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { UserService } from '../_services/user.service';
-import { AuthenticationService } from '../_services/authentication.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
-import { UserModel } from '../_models/user-model.model';
-import * as Chart from 'chart.js';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ScoreService } from '../_services/score.service';
 import { Score } from '../_models/score.model';
 

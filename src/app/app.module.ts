@@ -15,6 +15,8 @@ import { HeaderComponent } from './header/header.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChartsModule } from 'ng2-charts';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HeaderComponent,
     ChangePasswordComponent,
     SidebarComponent,
+    CreateProjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HttpClientModule,
     ChartsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

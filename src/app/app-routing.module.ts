@@ -6,16 +6,18 @@ import { AuthGuard } from './_guards/auth.guard';
 import { RegisterComponent } from './register/register.component';
 import { RecoverComponent } from './recover/recover.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path : 'login',  component: LoginComponent},
   {path : 'home',  component: HomeComponent, canActivate: [AuthGuard] },
   {path : 'register',  component: RegisterComponent, canActivate: [AuthGuard]},
   {path : 'recover',  component: RecoverComponent},
   {path : 'change-password',  component: ChangePasswordComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'login' }
+  {path : 'new-project',  component: CreateProjectComponent, canActivate: [AuthGuard]},
+  {path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({
