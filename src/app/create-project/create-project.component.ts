@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectsService } from '../_services/projects.service';
 import { AlertService } from '../_services/alert.service';
 import { DatePipe } from '@angular/common';
+import { Type } from '../_models/type.model';
+import { Company } from '../_models/company.model';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-project',
@@ -16,21 +19,25 @@ export class CreateProjectComponent implements OnInit {
   submitted = false;
   startDate = new Date();
   endDate = this.startDate.getDate() + 1;
+  types: Type[] = [];
+  companies: Company[] = [];
 
   constructor(private formBuilder: FormBuilder,
     private projectsService: ProjectsService, private alertService: AlertService,
     private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.getCompanies();
+    this.getTypes();
     this.newProjectForm = this.formBuilder.group({
-      clientId: ['', Validators.required],
+      clientId: [, Validators.required],
       projectName: ['', Validators.required],
-      projectType: ['', Validators.required],
+      projectType: [, Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       address: ['', Validators.required],
-      desctiption: ['', Validators.required],
-      picture: ['', Validators.required]
+      description: ['', Validators.required]
+      //picture: [, Validators.required]
   });
   }
 
@@ -39,18 +46,88 @@ export class CreateProjectComponent implements OnInit {
         return new Date(dateString);
     }
     return null;
-}
+  }
 
+
+  private getTypes(){
+    this.projectsService.getTypes()
+      .pipe(first())
+      .subscribe(
+        data => {
+          if(data && data.success){
+            this.types = data.data;
+          }else{
+            this.alertService.error(data.errorMessage);
+            this.loading = false;
+          }
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
+  }
+
+  private getCompanies(){
+    this.projectsService.getCompanies()
+      .pipe(first())
+      .subscribe(
+        data => {
+          console.log(data);
+          if(data && data.success){
+            this.companies = data.data;
+          }else{
+            this.alertService.error(data.errorMessage);
+            this.loading = false;
+          }
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
+  }
 
   get f() { return this.newProjectForm.controls; }
 
   onSubmit() {
+    console.log(this.newProjectForm.value);
+    this.newProjectForm.value.clientId = this.companies[this.newProjectForm.value.clientId];
+    this.newProjectForm.value.projectType = this.companies[this.newProjectForm.value.projectType];
+    this.newProjectForm.value.startDate = new Date(this.newProjectForm.value.startDate);
+    this.newProjectForm.value.endDate = new Date(this.newProjectForm.value.endDate);
+    //const formdata: FormData = new FormData();
+    //formdata.append('file', this.newProjectForm.value.picture);
+    //this.newProjectForm.value.picture = formdata;
+    
+    console.log(this.newProjectForm.value);
     this.submitted = true;
-    // stop here if form is invalid
+    //stop here if form is invalid
     if (this.newProjectForm.invalid) {
         return;
     }
     this.loading = true;
+    console.log("sending request");
+    console.log(this.newProjectForm.value);
+    this.projectsService.createProject(this.newProjectForm.value)
+        .pipe(first())
+        .subscribe(
+            data => {
+              console.log("data");
+              console.log(data);
+              if(data && data.success){
+                this.alertService.success('Project created successfully', true);
+                this.loading = false;
+                //this.router.navigate(['/login']);
+              }else{
+                this.alertService.error(data.errorMessage);
+                this.loading = false;
+              }
+            },
+            error => {
+              console.log("error");
+              console.log(error);
+              this.alertService.error(error);
+              this.loading = false;
+            });
   }
 
 }

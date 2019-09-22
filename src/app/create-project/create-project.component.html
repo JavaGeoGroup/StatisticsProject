@@ -3,7 +3,11 @@
     <form [formGroup]="newProjectForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="clientId">client Id </label>
-            <input type="text" formControlName="clientId" class="form-control createInput" [ngClass]="{ 'is-invalid': submitted && f.clientId.errors }" />
+            <select formControlName="clientId" id="clientId">
+                <option *ngFor="let company of companies; let c = index" [value]="c">
+                    {{company.name}}
+                </option>
+            </select>
             <div *ngIf="submitted && f.clientId.errors" class="invalid-feedback">
                 <div *ngIf="f.clientId.errors.required">Client is required</div>
             </div>
@@ -16,22 +20,26 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="projectType">Project Type</label>
-            <input type="number" formControlName="projectType" class="form-control createInput" [ngClass]="{ 'is-invalid': submitted && f.projectType.errors }" />
+            <label for="projectType">project type </label>
+            <select formControlName="projectType" id="projectType">
+                <option *ngFor="let prType of types; let i = index" [value]="i">
+                    {{prType.description}}
+                </option>
+            </select>
             <div *ngIf="submitted && f.projectType.errors" class="invalid-feedback">
-                <div *ngIf="f.projectType.errors.required">Project type is required</div>
+                <div *ngIf="f.projectType.errors.required">project type is required</div>
             </div>
         </div>
         <div class="form-group">
             <label for="startDate">Start Date</label>
-            <input type="date" [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate = $event" name="startDate" formControlName="startDate" class="form-control createInput" [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
+            <input type="date"  name="startDate" formControlName="startDate" class="form-control createInput" [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
             <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
                 <div *ngIf="f.startDate.errors.required">Start Date is required</div>
             </div>
         </div>
         <div class="form-group">
             <label for="endDate">End Date</label>
-            <input type="date" [ngModel]="endDate | date:'yyyy-MM-dd'" (ngModelChange)="endDate = $event" name="endDate" formControlName="endDate" class="form-control createInput" [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" />
+            <input type="date"  name="endDate" formControlName="endDate" class="form-control createInput" [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" />
             <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
                 <div *ngIf="f.endDate.errors.required">End Date is required</div>
             </div>
@@ -44,19 +52,19 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="desctiption">Desctiption</label>
-            <input type="text" formControlName="desctiption" class="form-control createInput" [ngClass]="{ 'is-invalid': submitted && f.desctiption.errors }" />
-            <div *ngIf="submitted && f.desctiption.errors" class="invalid-feedback">
-                <div *ngIf="f.desctiption.errors.required">Desctiption is required</div>
+            <label for="description">Description</label>
+            <input type="text" formControlName="description" class="form-control createInput" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required">Description is required</div>
             </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <label for="picture">Picture</label>
             <input type="file" accept="image/*" formControlName="picture" class="form-control createInput" [ngClass]="{ 'is-invalid': submitted && f.picture.errors }" />
             <div *ngIf="submitted && f.picture.errors" class="invalid-feedback">
                 <div *ngIf="f.picture.errors.required">Picture is required</div>
             </div>
-        </div>
+        </div> -->
         
         <div class="form-group">
             <button [disabled]="loading" class="btn btn-primary createBtn">Create</button>

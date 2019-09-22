@@ -77,8 +77,6 @@ export class HomeComponent implements OnInit {
           if(data && data.success){
             this.scores = data.data;
             this.fillPieChartsData();
-            console.log("Labels :" + this.pieChartLabels);
-            console.log("Data :" + this.pieChartData);
           }else{
             this.alertService.error(data.errorMessage);
             this.loading = false;
