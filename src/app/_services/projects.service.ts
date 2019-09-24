@@ -8,6 +8,7 @@ import { TypesResponse } from '../_models/types-response.model';
 import { CompanyResponse } from '../_models/company-response.model';
 import { Response } from '../_models/response.model';
 import { Project } from '../_models/project.model';
+import { ProjectsResponse } from '../_models/projects-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class ProjectsService {
     private authenticationService: AuthenticationService) { }
 
   getTypes(){
-    console.log(this.authenticationService.getHeaders());
     return this.http.get<TypesResponse>(this.rootUrl + '/project/projectTypes',
       {headers: this.authenticationService.getHeaders()});
   }
@@ -34,4 +34,10 @@ export class ProjectsService {
     return this.http.post<Response>(this.rootUrl + '/project/general',project,
       {headers: this.authenticationService.getHeaders()}); 
   }
+
+  getProjects(){
+    return this.http.get<ProjectsResponse>(this.rootUrl + '/project/general',
+      {headers: this.authenticationService.getHeaders()}); 
+  }
+
 }

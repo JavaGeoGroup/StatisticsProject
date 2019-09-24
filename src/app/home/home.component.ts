@@ -89,8 +89,6 @@ export class HomeComponent implements OnInit {
   }
 
   public onChartClick(e: any): void {
-    console.log("hi");
-    console.log(e);
 
     if (e.active.length > 0) {
       const chart = e.active[0]._chart;
@@ -101,7 +99,6 @@ export class HomeComponent implements OnInit {
         const label = chart.data.labels[clickedElementIndex];
         // get value by index
         const value = chart.data.datasets[0].data[clickedElementIndex];
-        console.log(clickedElementIndex, label, value)
       }
     }
 

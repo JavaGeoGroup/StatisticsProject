@@ -17,6 +17,7 @@ import { ChartsModule } from 'ng2-charts';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { DatePipe } from '@angular/common';
+import { ProjectsComponent } from './projects/projects.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { DatePipe } from '@angular/common';
     ChangePasswordComponent,
     SidebarComponent,
     CreateProjectComponent,
+    ProjectsComponent,
   ],
   imports: [
     BrowserModule,

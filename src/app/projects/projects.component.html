@@ -1,0 +1,21 @@
+<table mdbTable striped="true">
+    <thead class="grey lighten-1">
+        <tr>
+            <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let proj of projects">
+        <th scope="row">{{ proj.client === undefined ? 1 :proj.client.name}}</th>
+        <td>{{proj.projectName}}</td>
+        <td>{{proj.projectType === undefined ? 0 : proj.projectType.description}}</td>
+        <td>{{proj.projectManagerId === undefined ? 0 : proj.projectManagerId.userName}}</td>
+        <td>{{proj.startDate}}</td>
+        <td>{{proj.endDate}}</td>
+        <td>{{proj.address}}</td>
+        <td>{{proj.description}}</td>
+        <td>{{proj.createDate}}</td>
+        <td>{{proj.versionDate}}</td>
+      </tr>
+    </tbody>
+</table>

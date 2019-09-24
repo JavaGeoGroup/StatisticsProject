@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { RecoverComponent } from './recover/recover.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path : 'register',  component: RegisterComponent, canActivate: [AuthGuard]},
   {path : 'recover',  component: RecoverComponent},
   {path : 'change-password',  component: ChangePasswordComponent, canActivate: [AuthGuard] },
+  {path : 'projects',  component: ProjectsComponent, canActivate: [AuthGuard]},
   {path : 'new-project',  component: CreateProjectComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: 'login'}
 ];

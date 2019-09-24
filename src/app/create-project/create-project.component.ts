@@ -30,7 +30,7 @@ export class CreateProjectComponent implements OnInit {
     this.getCompanies();
     this.getTypes();
     this.newProjectForm = this.formBuilder.group({
-      clientId: [, Validators.required],
+      client: [, Validators.required],
       projectName: ['', Validators.required],
       projectType: [, Validators.required],
       startDate: ['', Validators.required],
@@ -72,7 +72,6 @@ export class CreateProjectComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
           if(data && data.success){
             this.companies = data.data;
           }else{
@@ -89,8 +88,7 @@ export class CreateProjectComponent implements OnInit {
   get f() { return this.newProjectForm.controls; }
 
   onSubmit() {
-    console.log(this.newProjectForm.value);
-    this.newProjectForm.value.clientId = this.companies[this.newProjectForm.value.clientId];
+    this.newProjectForm.value.client = this.companies[this.newProjectForm.value.client];
     this.newProjectForm.value.projectType = this.companies[this.newProjectForm.value.projectType];
     this.newProjectForm.value.startDate = new Date(this.newProjectForm.value.startDate);
     this.newProjectForm.value.endDate = new Date(this.newProjectForm.value.endDate);
@@ -98,21 +96,16 @@ export class CreateProjectComponent implements OnInit {
     //formdata.append('file', this.newProjectForm.value.picture);
     //this.newProjectForm.value.picture = formdata;
     
-    console.log(this.newProjectForm.value);
     this.submitted = true;
     //stop here if form is invalid
     if (this.newProjectForm.invalid) {
         return;
     }
     this.loading = true;
-    console.log("sending request");
-    console.log(this.newProjectForm.value);
     this.projectsService.createProject(this.newProjectForm.value)
         .pipe(first())
         .subscribe(
             data => {
-              console.log("data");
-              console.log(data);
               if(data && data.success){
                 this.alertService.success('Project created successfully', true);
                 this.loading = false;
@@ -123,8 +116,6 @@ export class CreateProjectComponent implements OnInit {
               }
             },
             error => {
-              console.log("error");
-              console.log(error);
               this.alertService.error(error);
               this.loading = false;
             });
