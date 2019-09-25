@@ -18,6 +18,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { DatePipe } from '@angular/common';
 import { ProjectsComponent } from './projects/projects.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ProjectsComponent } from './projects/projects.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    NgxPaginationModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

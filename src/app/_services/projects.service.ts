@@ -29,14 +29,12 @@ export class ProjectsService {
   }
 
   createProject(project: Project){
-    console.log("project");
-    console.log(project);
     return this.http.post<Response>(this.rootUrl + '/project/general',project,
       {headers: this.authenticationService.getHeaders()}); 
   }
 
-  getProjects(){
-    return this.http.get<ProjectsResponse>(this.rootUrl + '/project/general',
+  getProjects(page:number){
+    return this.http.get<ProjectsResponse>(this.rootUrl + '/project/general/offset/' + page + "/limit/" + 2,
       {headers: this.authenticationService.getHeaders()}); 
   }
 

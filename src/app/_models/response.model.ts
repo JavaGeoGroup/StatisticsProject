@@ -4,5 +4,6 @@ export class Response {
     errorMessage: string;
     message: string;
     success: boolean;
+    dataSize: number;
     constructor(){};
 }

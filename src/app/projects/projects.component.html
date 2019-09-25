@@ -5,7 +5,7 @@
         </tr>
     </thead>
     <tbody>
-      <tr mdbTableCol *ngFor="let proj of projects">
+      <tr mdbTableCol *ngFor="let proj of projects| paginate: { itemsPerPage: 2, currentPage: page ,totalItems: dataSize}">
         <th scope="row">{{ proj.client === undefined ? 1 :proj.client.name}}</th>
         <td>{{proj.projectName}}</td>
         <td>{{proj.projectType === undefined ? 0 : proj.projectType.description}}</td>
@@ -19,3 +19,5 @@
       </tr>
     </tbody>
 </table>
+<pagination-controls (pageChange)="pageChanged($event)" previousLabel="Previous" nextLabel="Next"></pagination-controls>
+
