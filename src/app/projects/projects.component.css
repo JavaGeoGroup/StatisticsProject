@@ -1,0 +1,12 @@
+.projImg {
+    width: 30px;
+    height: 30px;
+}
+
+.createBtn{
+    background: #1374a6 !important;
+    border: #1374a6 !important;
+    margin-top: 20px;
+    padding: 8px 25px;
+    border-radius: 0;
+}

@@ -3,7 +3,7 @@ import { Type } from './type.model';
 import { Account } from './account.model';
 
 export class Project {
-    client: Company;
+    /*client: Company;
     projectName: string;
     projectType: Type;
     projectManagerId: Account;
@@ -13,5 +13,11 @@ export class Project {
     description: string;
     createDate: Date;
     versionDate: Date;
-    //picture: FormData;
+    //picture: FormData;*/
+    id: number;
+    projectName: string;
+    address: string;
+    pictureUrl: string;
+    startDate: Date;
+    endDate: Date;
 }

@@ -5,17 +5,19 @@
         </tr>
     </thead>
     <tbody>
-      <tr mdbTableCol *ngFor="let proj of projects| paginate: { itemsPerPage: 2, currentPage: page ,totalItems: dataSize}">
-        <th scope="row">{{ proj.client === undefined ? 1 :proj.client.name}}</th>
+      <tr mdbTableCol *ngFor="let proj of projects| paginate: { itemsPerPage: 4, currentPage: page ,totalItems: dataSize}">
+        <td><img class = "projImg" [src]="proj.pictureUrl" /></td>
+        <td>{{proj.id}}</td>
         <td>{{proj.projectName}}</td>
-        <td>{{proj.projectType === undefined ? 0 : proj.projectType.description}}</td>
-        <td>{{proj.projectManagerId === undefined ? 0 : proj.projectManagerId.userName}}</td>
         <td>{{proj.startDate}}</td>
         <td>{{proj.endDate}}</td>
         <td>{{proj.address}}</td>
-        <td>{{proj.description}}</td>
-        <td>{{proj.createDate}}</td>
-        <td>{{proj.versionDate}}</td>
+        <td>{{proj.address}}</td>
+        <td><button class="btn btn-primary createBtn">Edit</button></td>
+        <td><button class="btn btn-primary createBtn">Add budget</button></td>
+        <td><button class="btn btn-primary createBtn">Edit budget</button></td>
+        <td><button class="btn btn-primary createBtn">Add schedule</button></td>
+        <td><button class="btn btn-primary createBtn">Edit schedule</button></td>
       </tr>
     </tbody>
 </table>

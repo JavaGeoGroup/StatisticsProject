@@ -14,7 +14,7 @@ export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
   loading = false;
   submitted = false;
-  headElements = ['Client Name','Project Name','Type Desc.', 'Manager', 'Start Date', 'End Date', 'Address', 'Description', 'Create date', 'Version Date'];
+  headElements = ['Project','Id','Project Name','startDate', 'endDate', 'address', 'Edit Project', 'Add budget', 'Edit Budget', 'Add schedule', 'Edit schedule'];
   page: number;
   dataSize:number;
 
@@ -30,7 +30,6 @@ export class ProjectsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
           if(data && data.success){
             //this.projects = new Array<Project>(data.dataSize);
             this.projects = data.data;

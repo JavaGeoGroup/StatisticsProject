@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ScoresResponse } from '../_models/scores-response.model';
 import { AuthenticationService } from './authentication.service';
 import { HttpClient } from '@angular/common/http';
-import { Type } from '@angular/compiler';
-import { Company } from '../_models/company.model';
 import { TypesResponse } from '../_models/types-response.model';
 import { CompanyResponse } from '../_models/company-response.model';
 import { Response } from '../_models/response.model';
@@ -28,13 +25,14 @@ export class ProjectsService {
       {headers: this.authenticationService.getHeaders()}); 
   }
 
-  createProject(project: Project){
-    return this.http.post<Response>(this.rootUrl + '/project/general',project,
-      {headers: this.authenticationService.getHeaders()}); 
+  createProject(formData: FormData){
+    return this.http.post<Response>(this.rootUrl + '/project/general',formData,
+      {headers: this.authenticationService.getHeadersWithMultiPartData(),
+      reportProgress: true}); 
   }
 
   getProjects(page:number){
-    return this.http.get<ProjectsResponse>(this.rootUrl + '/project/general/offset/' + page + "/limit/" + 2,
+    return this.http.get<ProjectsResponse>(this.rootUrl + '/project/getProjects?offset=' + page*4 + "&count=" + 4,
       {headers: this.authenticationService.getHeaders()}); 
   }
 

@@ -37,7 +37,6 @@ export class CreateProjectComponent implements OnInit {
       endDate: ['', Validators.required],
       address: ['', Validators.required],
       description: ['', Validators.required]
-      //picture: [, Validators.required]
   });
   }
 
@@ -87,6 +86,18 @@ export class CreateProjectComponent implements OnInit {
 
   get f() { return this.newProjectForm.controls; }
 
+  formData:FormData = new FormData();
+  imgFile: File;
+  fileChange(event) {
+    console.log("I am in fileChange");
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        this.imgFile = fileList[0];
+        this.formData.append('file', file);
+    }
+}
+
   onSubmit() {
     this.newProjectForm.value.client = this.companies[this.newProjectForm.value.client];
     this.newProjectForm.value.projectType = this.companies[this.newProjectForm.value.projectType];
@@ -95,17 +106,25 @@ export class CreateProjectComponent implements OnInit {
     //const formdata: FormData = new FormData();
     //formdata.append('file', this.newProjectForm.value.picture);
     //this.newProjectForm.value.picture = formdata;
-    
     this.submitted = true;
     //stop here if form is invalid
-    if (this.newProjectForm.invalid) {
-        return;
-    }
+
+    //if (this.newProjectForm.invalid) {
+    //    return;
+    //}
+
+    const userBlob = new Blob([JSON.stringify(this.newProjectForm.value)],{ type: "application/json"});
+    //const userBlob = new Blob([this.newProjectForm.value],{ type: "application/json"});
+    this.formData.append('projectModel', userBlob);
+
+    //this.formData.append('projectModel', this.newProjectForm.value);
     this.loading = true;
-    this.projectsService.createProject(this.newProjectForm.value)
+    this.projectsService.createProject(this.formData)
         .pipe(first())
         .subscribe(
             data => {
+              console.log("data");
+              console.log(data);
               if(data && data.success){
                 this.alertService.success('Project created successfully', true);
                 this.loading = false;

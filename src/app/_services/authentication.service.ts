@@ -77,4 +77,12 @@ export class AuthenticationService {
       }
       return this.headers;
     }
+
+    getHeadersWithMultiPartData(){
+        this.token  = JSON.parse(localStorage.getItem('currentUser')).data.accessToken;
+        this.headers = new HttpHeaders({
+          'Access-Token': this.token});
+          this.userLoggedIn = true;
+      return this.headers;
+    }
 }
